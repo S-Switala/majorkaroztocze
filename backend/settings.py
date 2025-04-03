@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "tymczasowy-klucz-dev")
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "your-backend.onrender.com",  # ← podmień po deployu
+    ".onrender.com",  # ← podmień po deployu
     "localhost",
     "127.0.0.1"
 ]
@@ -144,3 +144,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+CORS_ALLOW_CREDENTIALS = True
