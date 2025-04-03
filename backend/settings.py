@@ -55,6 +55,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "https://loquacious-strudel-5e3e90.netlify.app",
 ]
 
 
