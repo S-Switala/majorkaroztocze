@@ -24,12 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "tymczasowy-klucz-dev")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
-    ".onrender.com",  # ← podmień po deployu
+    "https://majorkaroztocze.onrender.com",  # ← podmień po deployu
     "localhost",
-    "127.0.0.1"
+    "127.0.0.1",
+
 ]
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -65,6 +67,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "https://loquacious-strudel-5e3e90.netlify.app",
+    "https://majorkaroztocze.pl",
 ]
 
 
@@ -145,3 +148,4 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 CORS_ALLOW_CREDENTIALS = True
+SECURE_SSL_REDIRECT = True
