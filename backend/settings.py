@@ -100,6 +100,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        dj_database_url.config(conn_max_age=600),
     }
 }
 
@@ -149,3 +150,4 @@ MEDIA_ROOT = BASE_DIR / 'media'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 CORS_ALLOW_CREDENTIALS = True
 SECURE_SSL_REDIRECT = True
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
