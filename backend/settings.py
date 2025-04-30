@@ -29,10 +29,9 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "tymczasowy-klucz-dev")
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    "https://majorkaroztocze.onrender.com",  # ← podmień po deployu
-    "localhost",
-    "127.0.0.1",
-
+    'majorkaroztocze-production.up.railway.app',
+    '127.0.0.1',
+    'localhost'
 ]
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
@@ -55,9 +54,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -139,7 +138,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
