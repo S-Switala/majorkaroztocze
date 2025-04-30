@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from datetime import timedelta
+from cloudinary.models import CloudinaryField
+from cloudinary_storage.storage import MediaCloudinaryStorage
 
 class KayakRentalSettings(models.Model):
     total_kayaks_double = models.PositiveIntegerField(default=10)
@@ -126,7 +128,7 @@ class CampingReservation(models.Model):
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
-    image = models.ImageField(upload_to="blog_images/")
+    image = models.ImageField(upload_to="blog_images/", storage=MediaCloudinaryStorage())
     link = models.SlugField(unique=True)
 
     def __str__(self):
