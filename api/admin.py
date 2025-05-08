@@ -1,10 +1,9 @@
 from django.contrib import admin
-from .models import KayakReservation, KayakRoute, KayakRentalSettings, Cabin, CabinReservation, CampingPricing, CampingReservation, BlogPost
+from .models import KayakReservation, KayakRoute, KayakRentalSettings, Cabin, CabinReservation, CampingPricing, CampingReservation, BlogPost, BlogImage
 
 admin.site.register(KayakReservation)
 admin.site.register(KayakRoute)
 admin.site.register(KayakRentalSettings)
-
 
 @admin.register(Cabin)
 class CabinAdmin(admin.ModelAdmin):
@@ -28,7 +27,12 @@ class CampingReservationAdmin(admin.ModelAdmin):
     search_fields = ('user_name', 'email', 'phone_number')
     ordering = ('start_date',)
 
-@admin.register(BlogPost)
+class BlogImageInline(admin.TabularInline):
+    model = BlogImage
+    extra = 1  # pokaż 1 pusty formularz
+
 class BlogPostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'link')
-    prepopulated_fields = {'link': ('title',)}
+    inlines = [BlogImageInline]
+    prepopulated_fields = {"link": ("title",)}  
+
+admin.site.register(BlogPost, BlogPostAdmin)
