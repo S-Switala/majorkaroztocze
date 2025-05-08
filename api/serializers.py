@@ -45,6 +45,7 @@ class CampingReservationSerializer(serializers.ModelSerializer):
         read_only_fields = ['total_price']  # Cena obliczana automatycznie
 
 class BlogPostSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
     class Meta:
         model = BlogPost
         fields = ['id', 'title', 'content', 'image', 'link']
