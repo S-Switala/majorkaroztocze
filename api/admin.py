@@ -31,8 +31,8 @@ class BlogImageInline(admin.TabularInline):
     model = BlogImage
     extra = 1  # pokaż 1 pusty formularz
 
+@admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
     inlines = [BlogImageInline]
     prepopulated_fields = {"link": ("title",)}  
 
-admin.site.register(BlogPost, BlogPostAdmin)
