@@ -48,3 +48,6 @@ class BlogPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = BlogPost
         fields = ['id', 'title', 'content', 'image', 'link']
+
+    def get_image(self, obj):
+        return obj.image.url if obj.image else None
