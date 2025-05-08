@@ -128,7 +128,7 @@ class CampingReservation(models.Model):
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
-    image = models.ImageField()
+    image = CloudinaryField('image')
     link = models.SlugField(unique=True)
 
     def __str__(self):
