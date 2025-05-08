@@ -33,6 +33,6 @@ class BlogImageInline(admin.TabularInline):
 
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
-    inlines = [BlogImageInline]
+    # inlines = [BlogImageInline]
     prepopulated_fields = {"link": ("title",)}  
 
