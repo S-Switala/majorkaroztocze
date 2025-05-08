@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import KayakReservation, KayakRoute, KayakRentalSettings, CabinReservation, Cabin, CampingReservation, BlogPost
+from .models import KayakReservation, KayakRoute, KayakRentalSettings, CabinReservation, Cabin, CampingReservation, BlogPost, BlogImage
 
 class KayakRouteSerializer(serializers.ModelSerializer):
     class Meta:
@@ -44,11 +44,28 @@ class CampingReservationSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ['total_price']  # Cena obliczana automatycznie
 
-class BlogPostSerializer(serializers.ModelSerializer):
+class BlogImageSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
+
     class Meta:
-        model = BlogPost
-        fields = ['id', 'title', 'content', 'image', 'link']
+        model = BlogImage
+        fields = ['image', 'alt_text']
 
     def get_image(self, obj):
         return obj.image.url if obj.image else None
+class BlogPostSerializer(serializers.ModelSerializer):
+    images = BlogImageSerializer(many=True, read_only=True)
+    image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = BlogPost
+        fields = [
+            'id', 'title', 'content', 'link',
+            'meta_title', 'meta_description', 'meta_keywords', 'meta_author',
+            'images'
+        ]
+
+    def get_image(self, obj):
+        if obj.images.first():
+            return obj.images.first().image.url
+        return None

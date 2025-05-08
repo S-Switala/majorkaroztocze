@@ -127,9 +127,24 @@ class CampingReservation(models.Model):
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
-    content = models.TextField()
-    image = CloudinaryField('image')
+    content = models.TextField(help_text="Treść z HTML (np. <p>, <img>, <h2>)")
     link = models.SlugField(unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    # SEO
+    meta_title = models.CharField(max_length=255, help_text="Tytuł do <title>", blank=True)
+    meta_description = models.TextField(help_text="Opis do <meta name='description'>", blank=True)
+    meta_keywords = models.CharField(max_length=255, help_text="Słowa kluczowe, oddzielone przecinkami", blank=True)
+    meta_author = models.CharField(max_length=255, default="Majorka Roztocze", blank=True)
 
     def __str__(self):
         return self.title
+
+
+class BlogImage(models.Model):
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='images')
+    image = CloudinaryField('image')
+    alt_text = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return f"Obrazek do: {self.post.title}"
