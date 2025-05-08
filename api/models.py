@@ -146,4 +146,4 @@ class BlogImage(models.Model):
     alt_text = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
-        return f"Obrazek do: {self.post.title}"
+        return f"Obrazek do: {self.post.title}" 

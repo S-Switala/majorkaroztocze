@@ -101,7 +101,10 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(conn_max_age=600)
+    'default': dj_database_url.config(
+        conn_max_age=600,
+        default='sqlite:///db.sqlite3'  # ← fallback, jeśli brak DATABASE_URL
+    )
 }
 
 # Password validation
